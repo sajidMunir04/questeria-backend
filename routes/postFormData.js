@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL;
 
-router.post('/api/formData', function(req, res, next) {
+router.post('/api/postFormData', function(req, res, next) {
     
 });
 
