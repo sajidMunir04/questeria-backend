@@ -5,7 +5,7 @@ const { MongoClient } = require('mongodb');
 
 const mongoString = process.env.DATABASE_URL;
 
-router.get('/getFormData', async function(req, res, next) {
+router.get('/api/getFormData', async function(req, res, next) {
     const client = new MongoClient(mongoString);
     let conn;
 
