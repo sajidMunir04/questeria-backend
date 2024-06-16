@@ -6,8 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var formData = require('./routes/postFormData');
-var getFormData = require('./routes/getFormData');
+var saveformData = require('./routes/formData/postFormData');
+var getFormData = require('./routes/formData/getFormData');
 
 
 var app = express();
@@ -24,8 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/formData',formData);
-app.use('/api/getFormData',getFormData);
+app.use('/formData/formData',saveformData);
+app.use('/formData/getFormData',getFormData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -14,7 +14,7 @@ router.get('/api/getFormData', async function(req, res, next) {
         let db = await conn.db('formData');
         let collection = db.collection('');
         let data = collection.findOne({ _id: req.body})
-        res.json({'data': result});
+        res.json({'data': data});
      }
      catch {
         console.error(e);
