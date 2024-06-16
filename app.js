@@ -29,6 +29,11 @@ app.use('/users', usersRouter);
 app.use('/formData/formData',saveformData);
 app.use('/formData/getFormData',getFormData);
 
+app.listen(3000,() => {
+  console.log("Listening o 3000");
+})
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
