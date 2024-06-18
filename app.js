@@ -13,16 +13,17 @@ var postFormDataRouter = require('./routes/formData/postFormData');
 var app = express();
 
 const corsOptions = {
-  origin: '*', // Allow a specific origin
+  origin: `'*'`, // Allow a specific origin
   methods: ['GET', 'POST'],     // Allow only GET and POST requests
-  allowedHeaders: ['*'], // Allow only headers with Content-Type
+  allowedHeaders: ['Content-Type'], // Allow only headers with Content-Type
 };
+
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
