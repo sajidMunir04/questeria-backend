@@ -15,7 +15,7 @@ router.post('/', async function(req, res, next) {
         let db = await conn.db('formData');
         let collection = db.collection('');
         let result = await collection.insertOne(req.body);
-        res.send(result);
+        res.json({'result' : result});
      }
      catch {
         console.error(e);

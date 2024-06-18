@@ -14,7 +14,7 @@ router.get('/', async function(req, res, next) {
         let db = await conn.db('formData');
         let collection = db.collection('');
         let data = collection.findOne({ _id: req.body})
-        res.send(data);
+        res.json({'data' : data});
      }
      catch {
         console.error(e);
