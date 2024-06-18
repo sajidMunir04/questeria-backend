@@ -14,7 +14,7 @@ var app = express();
 
 const corsOptions = {
   origin: '*', // Allow a specific origin
-  methods: ['GET', 'POST'],     // Allow only GET and POST requests
+  methods: ['GET', 'POST','PUT','DELETE'],     // Allow only GET and POST requests
   allowedHeaders: ['Content-Type'], // Allow only headers with Content-Type
 };
 
