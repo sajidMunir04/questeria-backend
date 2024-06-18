@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL;
 
-router.post('/api/postFormData', async function(req, res, next) {
+router.post('/', async function(req, res, next) {
     const client = new MongoClient(mongoString);
     let conn;
 
@@ -15,7 +15,7 @@ router.post('/api/postFormData', async function(req, res, next) {
         let db = await conn.db('formData');
         let collection = db.collection('');
         let result = await collection.insertOne(req.body);
-        res.json({'result': result});
+        res.send(result);
      }
      catch {
         console.error(e);

@@ -7,8 +7,8 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
-
+var getFormDataRouter = require('./routes/formData/getFormData');
+var postFormDataRouter = require('./routes/formData/postFormData');
 
 var app = express();
 
@@ -25,9 +25,10 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/getFormData',getFormDataRouter);
+app.use('/api/postFormData',postFormDataRouter)
 
-
-app.listen(3000,() => {
+app.listen(9000,() => {
   console.log("Listening o 3000");
 })
 

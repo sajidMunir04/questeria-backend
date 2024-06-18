@@ -5,7 +5,7 @@ const { MongoClient } = require('mongodb');
 
 const mongoString = process.env.DATABASE_URL;
 
-router.get('/api/getFormData', async function(req, res, next) {
+router.get('/', async function(req, res, next) {
     const client = new MongoClient(mongoString);
     let conn;
 
@@ -14,7 +14,7 @@ router.get('/api/getFormData', async function(req, res, next) {
         let db = await conn.db('formData');
         let collection = db.collection('');
         let data = collection.findOne({ _id: req.body})
-        res.json({'data': data});
+        res.send(data);
      }
      catch {
         console.error(e);
