@@ -13,7 +13,7 @@ var postFormDataRouter = require('./routes/formData/postFormData');
 var app = express();
 
 const corsOptions = {
-  origin: `'*'`, // Allow a specific origin
+  origin: '*', // Allow a specific origin
   methods: ['GET', 'POST'],     // Allow only GET and POST requests
   allowedHeaders: ['Content-Type'], // Allow only headers with Content-Type
 };
