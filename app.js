@@ -18,7 +18,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type'], // Allow only headers with Content-Type
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
