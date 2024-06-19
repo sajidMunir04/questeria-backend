@@ -12,13 +12,7 @@ var postFormDataRouter = require('./routes/formData/postFormData');
 
 var app = express();
 
-const corsOptions = {
-  origin: '*', // Allow a specific origin
-  methods: ['GET', 'POST','PUT','DELETE'],     // Allow only GET and POST requests
-  allowedHeaders: ['Content-Type'], // Allow only headers with Content-Type
-};
-
-app.use(cors());
+app.use(cors({origin: '*'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
