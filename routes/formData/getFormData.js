@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 require('dotenv').config();
-const { MongoClient } = require('mongodb');
+var MongoClient = require('mongodb');
 
 const mongoString = process.env.DATABASE_URL;
 
