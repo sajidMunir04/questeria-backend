@@ -7,7 +7,6 @@ require('dotenv').config();
 const mongoString = process.env.DATABASE_URL;
 
 router.post('/', async function(req, res, next) {
-   res.setHeader('Access-Control-Allow-Origin', '*');
     const client = new MongoClient(mongoString);
     let conn;
 
