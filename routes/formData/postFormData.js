@@ -1,6 +1,5 @@
-const e = require('express');
 var express = require('express');
-var MongoClient = require('mongodb');
+const { MongoClient } = require('mongodb');
 var router = express.Router();
 require('dotenv').config();
 
