@@ -1,9 +1,6 @@
-var express = require('express');
 const { MongoClient } = require('mongodb');
+const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
 var router = express.Router();
-require('dotenv').config();
-
-const mongoString = process.env.DATABASE_URL;
 
 router.post('/', async function(req, res, next) {
     const client = new MongoClient(mongoString);
@@ -11,8 +8,8 @@ router.post('/', async function(req, res, next) {
 
      try {
         conn = await client.connect();
-        let db = await conn.db('formData');
-        let collection = db.collection('');
+        let db = await conn.db(formDatabaseName);
+        let collection = db.collection(formCollectionName);
         let result = await collection.insertOne(req.body);
         res.json({'result' : result});
      }
