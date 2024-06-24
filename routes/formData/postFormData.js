@@ -1,6 +1,8 @@
+const express = require('express');
+const router = express.Router();
 const { MongoClient } = require('mongodb');
 const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
-var router = express.Router();
+
 
 router.post('/', async function(req, res, next) {
     const client = new MongoClient(mongoString);
