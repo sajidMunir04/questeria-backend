@@ -1,5 +1,5 @@
-const express = import('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
 
