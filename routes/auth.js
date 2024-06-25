@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var localStrategy = require('passport-local');
+var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 
-const pgp = require('pg-promise')(/* options */)
-const db = pgp('postgres://username:password@host:port/database')
-
-passport.use(new localStrategy(function verify(username,password,cb) {
+passport.use(new LocalStrategy(function verify(username,password,cb) {
     db.one('Select user from data',[username],function(err,user) {
         if (err) {
             return cb(err);
@@ -35,6 +32,14 @@ passport.use(new localStrategy(function verify(username,password,cb) {
     })
 }))
 
-router.post('/', passport.authenticate('local',{failureRedirect: '/login',successRedirect:'/'}) , async function(req,res,next) {
-    
-})
+router.get('/login', function(req, res, next) {
+    res.render('login');
+});
+  
+
+router.post('/login/password',passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/'
+}))
+
+module.exports = router;

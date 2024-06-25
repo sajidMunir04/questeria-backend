@@ -4,6 +4,10 @@ const { MongoClient } = require('mongodb');
 const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
 
 router.get('/', async function(req, res, next) {
+
+   res.send("Get Form Data Page");
+
+   /*
     const client = new MongoClient(mongoString);
     let conn;
 
@@ -18,6 +22,7 @@ router.get('/', async function(req, res, next) {
         console.error(e);
         res.json({'error': e});
      }
+        */
 });
 
 module.exports = router;
