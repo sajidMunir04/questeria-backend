@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var session = require('express-session');
 var passport = require('passport');
 
 
@@ -13,12 +12,6 @@ app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: true }
-}));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -34,23 +27,6 @@ app.use(passport.authenticate('session'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
-
-
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, {
-      id: user.id,
-      username: user.username,
-      picture: user.picture
-    });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
 
 
 app.use('/', indexRouter);
