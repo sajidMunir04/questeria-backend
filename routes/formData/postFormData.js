@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
 
 
-router.post('/', async function(req, res, next) {
+router.post('/postFormData', async function(req, res, next) {
 
    res.send("Post Form Data Page");
    /*

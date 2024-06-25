@@ -3,7 +3,7 @@ var router = express.Router();
 const { MongoClient } = require('mongodb');
 const { mongoString, formDatabaseName, formCollectionName } = require('../../configuration');
 
-router.get('/', async function(req, res, next) {
+router.get('/getFormData', async function(req, res, next) {
 
    res.send("Get Form Data Page");
 

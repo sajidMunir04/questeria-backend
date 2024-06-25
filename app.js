@@ -7,8 +7,11 @@ var cors = require('cors');
 var session = require('express-session');
 var passport = require('passport');
 
+
 var app = express();
 app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
   secret: 'keyboard cat',
@@ -27,6 +30,10 @@ var postFormDataRouter = require('./routes/formData/postFormData');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(passport.authenticate('session'));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(cookieParser());
 
 
 passport.serializeUser(function(user, cb) {
@@ -46,18 +53,11 @@ passport.deserializeUser(function(user, cb) {
 });
 
 
-app.use(passport.authenticate('session'));
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
 app.use('/', indexRouter);
 app.use('/auth',authRouter);
 app.use('/users', usersRouter);
-app.use('/api/getFormData',getFormDataRouter);
-app.use('/api/postFormData',postFormDataRouter);
+app.use('/api',getFormDataRouter);
+app.use('/api',postFormDataRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
