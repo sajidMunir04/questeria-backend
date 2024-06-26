@@ -22,7 +22,6 @@ var postFormDataRouter = require('./routes/formData/postFormData');
 
 app.get('/',(req,res,next) => {
   res.send("Hi, you are on homepage");
-  next();
 })
 
 app.use('/auth',authRouter);
