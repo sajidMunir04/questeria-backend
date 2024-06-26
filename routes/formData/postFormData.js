@@ -5,9 +5,6 @@ const { mongoString, formDatabaseName, formCollectionName } = require('../../con
 
 
 router.post('/postFormData', async function(req, res, next) {
-
-   res.send("Post Form Data Page");
-   /*
     const client = new MongoClient(mongoString);
     let conn;
 
@@ -22,7 +19,6 @@ router.post('/postFormData', async function(req, res, next) {
         console.error(e);
         res.json({'error': e});
      }
-        */
 });
 
 module.exports = router;
