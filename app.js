@@ -20,8 +20,7 @@ var getFormDataRouter = require('./routes/formData/getFormData');
 var postFormDataRouter = require('./routes/formData/postFormData');
 
 
-app.post('/',(req,res,next) => {
-  console.log('Received POST request:', req.body);
+app.get('/',(req,res,next) => {
   res.send("Hi, you are on homepage");
   next();
 })
