@@ -14,8 +14,10 @@ router.post('/postFormData', async function(req, res, next) {
          return res.status(200).end();
      }
 
+     const { mergedData } = req.body;
+
      const questionsData = {
-         questionData : req.body
+         questionData : mergedData
      }
 
      try {
