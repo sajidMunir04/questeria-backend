@@ -26,7 +26,9 @@ router.post('/postFormData', async function(req, res, next) {
         const db = conn.db(formDatabaseName);
         const collection = db.collection(formCollectionName);
         const result = await collection.insertOne(questionsData);
-        res.json({'result' : result});
+        res.json({'result' : result,
+                  'reqBody': req.body
+        });
      }
      catch {
         console.error(e);
