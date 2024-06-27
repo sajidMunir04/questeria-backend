@@ -14,18 +14,16 @@ router.post('/postFormData', async function(req, res, next) {
          return res.status(200).end();
      }
 
-     const data = {
+     const questionsData = {
          questionData : req.body
      }
 
-    const client = new MongoClient(mongoString);
-    let conn;
-
      try {
-        conn = await client.connect();
-        const db = await conn.db(formDatabaseName);
+        const client = new MongoClient(mongoString);
+        const conn = await client.connect();
+        const db = conn.db(formDatabaseName);
         const collection = db.collection(formCollectionName);
-        const result = await collection.insertOne(data);
+        const result = await collection.insertOne(questionsData);
         res.json({'result' : result});
      }
      catch {
