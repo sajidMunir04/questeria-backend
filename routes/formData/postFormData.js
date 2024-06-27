@@ -8,10 +8,14 @@ router.post('/postFormData', async function(req, res, next) {
    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
    res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-   
+
       // Handle preflight requests
-       if (req.method === 'OPTIONS') {
+    if (req.method === 'OPTIONS') {
          return res.status(200).end();
+     }
+
+     const data = {
+         questionData : req.body
      }
 
     const client = new MongoClient(mongoString);
@@ -19,9 +23,9 @@ router.post('/postFormData', async function(req, res, next) {
 
      try {
         conn = await client.connect();
-        let db = await conn.db(formDatabaseName);
-        let collection = db.collection(formCollectionName);
-        let result = await collection.insertOne(req.body);
+        const db = await conn.db(formDatabaseName);
+        const collection = db.collection(formCollectionName);
+        const result = await collection.insertOne(data);
         res.json({'result' : result});
      }
      catch {
