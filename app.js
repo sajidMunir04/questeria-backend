@@ -5,8 +5,9 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var app = express();
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(cors());
 
 // view engine setup
