@@ -8,6 +8,7 @@ router.post('/postFormData', async function(req, res, next) {
    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
    res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+   res.header('Content-Type', 'application/json');
 
       // Handle preflight requests
     if (req.method === 'OPTIONS') {
