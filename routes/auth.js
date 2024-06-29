@@ -4,7 +4,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 const pgp = require('pg-promise');
-const db = pgp(psqlDb);
+const { userDatabaseLink } = require('../configuration');
+const db = pgp(userDatabaseLink);
 
 passport.use(new LocalStrategy(function verify(username,password,cb) {
     db.one('Select user from data WHERE first_name = ?',[username],function(err,user) {
