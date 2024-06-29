@@ -8,7 +8,7 @@ const { userDatabaseLink } = require('../configuration');
 const db = pgp(userDatabaseLink);
 
 passport.use(new LocalStrategy(function verify(username,password,cb) {
-    db.one('Select user from data WHERE first_name = ?',[username],function(err,user) {
+    db.one('Select user from Users WHERE first_name = ?',[username],function(err,user) {
         if (err) {
             return cb(err);
         }
@@ -72,7 +72,7 @@ router.post('/signup', function(req, res, next) {
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
-      db.one(`INSERT INTO users (first_name, hashed_password, salt) VALUES (${req.body.username}, ${hashedPassword}, ${salt})`, function(err) {
+      db.one(`INSERT INTO Users (first_name, hashed_password, salt) VALUES (${req.body.username}, ${hashedPassword}, ${salt})`, function(err) {
         if (err) { return next(err); }
         var user = {
           id: this.lastID,
