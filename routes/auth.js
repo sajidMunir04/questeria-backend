@@ -3,10 +3,11 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
-var psqlDb = require('pg-promise');
+const pgp = require('pg-promise');
+const db = pgp(psqlDb);
 
 passport.use(new LocalStrategy(function verify(username,password,cb) {
-    db.one('Select user from data WHERE username = ?',[username],function(err,user) {
+    db.one('Select user from data WHERE first_name = ?',[username],function(err,user) {
         if (err) {
             return cb(err);
         }
@@ -70,7 +71,7 @@ router.post('/signup', function(req, res, next) {
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
-      psqlDb.one(`INSERT INTO users (username, hashed_password, salt) VALUES (${req.body.username}, ${hashedPassword}, ${salt})`, function(err) {
+      db.one(`INSERT INTO users (first_name, hashed_password, salt) VALUES (${req.body.username}, ${hashedPassword}, ${salt})`, function(err) {
         if (err) { return next(err); }
         var user = {
           id: this.lastID,
