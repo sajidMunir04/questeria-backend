@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path:'./.env'});
 
 const mongoString = process.env.MONGODB_URL;
 const formDatabaseName = process.env.FORM_DATABASE_NAME;

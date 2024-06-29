@@ -3,12 +3,17 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')({
+  connect(e) {
+      const cp = e.client.connectionParameters;
+      console.log('Connected to database:', cp.database);
+  }
+});
 const { userDatabaseLink } = require('../configuration');
 const db = pgp(userDatabaseLink);
 
 passport.use(new LocalStrategy(function verify(username,password,cb) {
-    db.one('Select user from Users WHERE first_name = ?',[username],function(err,user) {
+    db.one('Select user from Users WHERE first_name = $1',[username],function(err,user) {
         if (err) {
             return cb(err);
         }
@@ -46,33 +51,25 @@ passport.serializeUser(function(user, cb) {
       return cb(null, user);
     });
   });
-
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
   
 
-router.post('/login/password',passport.authenticate('local', {
+router.post('/user/login',passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login'
 }))
 
-router.post('/logout', function(req, res, next) {
+router.post('/user/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
     });
 });
 
-router.get('/signup', function(req, res, next) {
-    res.render('signup');
-});
-
 router.post('/user/signup', function(req, res, next) {
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
-      db.one(`INSERT INTO Users (first_name, hashed_password, salt) VALUES (${req.body.username}, ${hashedPassword}, ${salt})`, function(err) {
+      db.none('INSERT INTO Users (first_name, hashed_password, salt) VALUES ($1, $2, $3)',[req.body.username, hashedPassword,salt], function(err) {
         if (err) { return next(err); }
         var user = {
           id: this.lastID,
