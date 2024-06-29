@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var cors = require('cors');
+var session = require('express-session');
+var passport = require('passport');
 
 const app = express();
 app.use(express.json());
@@ -13,6 +15,40 @@ app.use(cors());
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
+
+
+// Add middleware should go here
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true }
+}));
+
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, {
+      id: user.id,
+      username: user.username,
+      picture: user.picture
+    });
+  });
+});
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
+
+app.get('/auth',
+  passport.authenticate('session'),
+  function(req, res, next) {
+    
+});
+
+//
 
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
