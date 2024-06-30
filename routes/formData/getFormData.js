@@ -12,9 +12,9 @@ router.get('/getFormData', async function(req, res, next) {
 
      try {
         conn = await client.connect();
-        let db = await conn.db(formDatabaseName);
+        let db = conn.db(formDatabaseName);
         let collection = db.collection(formCollectionName);
-        let data = collection.findOne();
+        let data = collection.findOne({});
         res.json({'data' : data});
      }
      catch {
