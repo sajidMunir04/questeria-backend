@@ -6,7 +6,6 @@ var crypto = require('crypto');
 const pgp = require('pg-promise')({
   connect(e) {
       const cp = e.client.connectionParameters;
-      console.log('Connected to database:', cp.database);
   }
 });
 const { userDatabaseLink } = require('../configuration');
@@ -18,9 +17,13 @@ passport.use(new LocalStrategy(function verify(username,password,cb) {
             return cb(err);
         }
 
+        console.log('No Error Occured!');
+
         if (!user) {
             return cb(null,false,{message: 'Incorrect Email or Password'});
         }
+
+        console.log('If no user then should return',user);
 
         crypto.pbkdf2(password, 2,310000,32, 'sha256', function(err,hashedPassword) {
             if (err) {
@@ -37,6 +40,8 @@ passport.use(new LocalStrategy(function verify(username,password,cb) {
 
             return cb(null,user);
         })
+
+        console.log('Should Not reach here!');
     })
 }))
 
