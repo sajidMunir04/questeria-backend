@@ -54,8 +54,7 @@ passport.serializeUser(function(user, cb) {
   
 
 router.post('/user/login',passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
+
 }))
 
 router.post('/user/logout', function(req, res, next) {
