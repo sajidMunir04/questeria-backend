@@ -15,6 +15,7 @@ router.get('/getFormData', async function(req, res, next) {
          const collection = db.collection(formCollectionName);
          const data = await collection.findOne({});
          res.json(data);
+         conn.close();
      }
      catch {
         console.error(e);
