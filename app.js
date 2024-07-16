@@ -8,7 +8,7 @@ var passport = require('passport');
 
 const app = express();
 app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // view engine setup
@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Add middleware should go here
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'zasdXkjaskdSADJal',
   resave: false,
   saveUninitialized: false,
   cookie: { secure: true }
