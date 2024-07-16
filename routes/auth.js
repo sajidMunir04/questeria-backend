@@ -3,11 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
-const pgp = require('pg-promise')({
-  connect(e) {
-      const cp = e.client.connectionParameters;
-  }
-});
+const pgp = require('pg-promise')();
 const { userDatabaseLink } = require('../configuration');
 const db = pgp(userDatabaseLink);
 
