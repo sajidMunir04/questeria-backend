@@ -71,12 +71,6 @@ router.post('/user/signup', function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-          // Handle preflight requests
-   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-    }
-
-
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
