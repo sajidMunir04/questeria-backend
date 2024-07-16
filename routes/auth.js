@@ -8,7 +8,7 @@ const { userDatabaseLink } = require('../configuration');
 const db = pgp(userDatabaseLink);
 
 passport.use(new LocalStrategy(function verify(username,password,cb) {
-    db.none('Select user from Users WHERE first_name = $1',[username],function(err,user) {
+    db.none('Select user from Users WHERE email = $1',[username],function(err,user) {
         if (err) {
             return cb(err);
         }
