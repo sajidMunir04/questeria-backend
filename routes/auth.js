@@ -70,6 +70,13 @@ router.post('/user/logout', function(req, res, next) {
 });
 
 router.post('/user/signup', function(req, res, next) {
+
+          // Handle preflight requests
+   if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+    }
+
+
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
