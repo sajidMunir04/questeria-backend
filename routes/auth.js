@@ -73,7 +73,8 @@ router.post('/user/signup', function(req, res, next) {
     var salt = crypto.randomBytes(16);
     crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
       if (err) { return next(err); }
-      db.none('INSERT INTO Users (first_name, hashed_password, salt) VALUES ($1, $2, $3)',[req.body.username, hashedPassword,salt], function(err) {
+      db.none('INSERT INTO Users (email, hashed_password, salt, first_name, last_name,unique_id) VALUES ($1, $2, $3, $4, $5, $6)',
+        [req.body.username, hashedPassword,salt,req.body.firstName,req.body.lastName,req.body.uniqueID], function(err) {
         if (err) { return next(err); }
         var user = {
           id: this.lastID,
