@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const corsOptions = {
-  origin: 'http://localhost:5173/', // Allow all origins
+  origin: '*', // Allow all origins
   methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization','Origin', 'Accept', 'X-Requested-With'], // Allowed headers
   preflightContinue: true,
