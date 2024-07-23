@@ -11,13 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const corsOptions = {
-  origin: '*', // Allow all origins
+  origin: 'http://localhost:5173/', // Allow all origins
   methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization','Origin', 'Accept', 'X-Requested-With',
-    'Access-Control-Allow-Headers', 'Access-Control-Allow-Methods'],
-    preflightContinue: false,
-    optionsSuccessStatus: 200 // Allowed headers
-  //credentials: true // Allow credentials (cookies, authorization headers, TLS client certificates)
+  allowedHeaders: ['Content-Type', 'Authorization','Origin', 'Accept', 'X-Requested-With'], // Allowed headers
+  preflightContinue: true,
+  optionsSuccessStatus: 200, 
+  credentials: true // Allow credentials (cookies, authorization headers, TLS client certificates)
 };
 
 app.use(cors(corsOptions));
