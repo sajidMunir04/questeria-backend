@@ -16,7 +16,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization','Origin', 'Accept', 'X-Requested-With'], // Allowed headers
   preflightContinue: true,
   optionsSuccessStatus: 200, 
-  credentials: true // Allow credentials (cookies, authorization headers, TLS client certificates)
+ // credentials: true // Allow credentials (cookies, authorization headers, TLS client certificates)
 };
 
 app.use(cors(corsOptions));
